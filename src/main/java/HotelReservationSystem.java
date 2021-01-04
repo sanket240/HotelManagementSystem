@@ -14,6 +14,15 @@ public class HotelReservationSystem {
         System.out.println("Hotel Added");
         return true;
     }
+    public boolean addHotelWeekdayWeekend(String hotelName,int weekEndRate,int weekDayRate)
+    {
+        Hotel hotel1=new Hotel();
+        hotel1.name=hotelName;
+        hotel1.weekdayRate=weekDayRate;
+        hotel1.weekendRate=weekDayRate;
+        hotel.add(hotel1);
+        return true;
+    }
     public Result findCheapestHotel(String initialDateRange,String endDateRange) throws ParseException
     {
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");

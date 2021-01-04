@@ -1,6 +1,24 @@
 public class Hotel {
     int ratesForRegularCustomer;
+    int weekendRate;
+    int weekdayRate;
     String name;
+    public int getWeekendRate() {
+        return weekendRate;
+    }
+    public void setWeekendRate(int weekendRate) {
+        this.weekendRate = weekendRate;
+    }
+
+    public int getWeekdayRate() {
+        return weekdayRate;
+    }
+
+    public void setWeekdayRate(int weekdayRate) {
+        this.weekdayRate = weekdayRate;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -16,7 +34,8 @@ public class Hotel {
     public String toString() {
         return
                 "\n HotelName='" + name + '\'' +
-                        ", Rate for regular customer'" + ratesForRegularCustomer + '\''
+                        ", Weekend rates'" +  weekendRate + '\''+
+                        ", Weekday rates'" +weekdayRate+ '\''
                 ;
     }
 }
