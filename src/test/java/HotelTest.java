@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.List;
 
 public class HotelTest {
     @Test
@@ -38,5 +39,14 @@ public class HotelTest {
         Assert.assertTrue(result);
         Assert.assertTrue(result2);
         Assert.assertTrue(result3);
+    }
+    @Test
+    public void givenDateRange_whenSearched_shouldReturnCheapestHotelBasedOnWeekdayAndWeekend() throws ParseException {
+        HotelReservationSystem h1=new HotelReservationSystem();
+        h1.addHotel("Lakewood",110);
+        h1.addHotel("Bridgewood",160);
+        h1.addHotel("Ridgewood",220);
+        List<Result> cheapestHotelResult= h1.findCheapestHotelBasedOnDay("24/12/1998","28/12/1998");
+        Assert.assertEquals(3,cheapestHotelResult.size());
     }
 }

@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HotelReservationSystem {
     ArrayList<Hotel> hotel=new ArrayList<>();
@@ -44,5 +45,26 @@ public class HotelReservationSystem {
         {
             System.out.println(h);
         }
+    }
+    public List<Result> findCheapestHotelBasedOnDay(String initialDateRange,String endDateRange) throws ParseException
+    {
+
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateBefore = myFormat.parse(initialDateRange);
+        Date dateAfter = myFormat.parse(endDateRange);
+        long difference = dateAfter.getTime() - dateBefore.getTime();
+        float daysBetween = (difference / (1000*60*60*24));
+        System.out.println(daysBetween);
+        int a=Math.round(daysBetween);
+        List<Result> results= (List<Result>) hotel.stream().map(hotel1 -> {
+            Result result =new Result();
+            result.setName(hotel1.getName());
+            try {
+                result.setRate(hotel1.getTotalRates(initialDateRange,endDateRange));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }return  result;
+        }).sorted(Comparator.comparing(Result::getRate)).collect(Collectors.toList());
+        return results.stream().filter(result -> result.getRate()==result.getRate()).collect(Collectors.toList());
     }
 }

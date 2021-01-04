@@ -1,3 +1,8 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Hotel {
     int ratesForRegularCustomer;
     int weekendRate;
@@ -30,6 +35,19 @@ public class Hotel {
     }
     public void setRatesForRegularCustomer(int ratesForRegularCustomer) {
         this.ratesForRegularCustomer = ratesForRegularCustomer;
+    }
+    public int getTotalRates(String initialDateRange,String endDateRange) throws ParseException
+    {
+        int rate;
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateBefore = myFormat.parse(initialDateRange);
+        Date dateAfter = myFormat.parse(endDateRange);
+        long difference = dateAfter.getTime() - dateBefore.getTime();
+        float daysBetween = (difference / (1000*60*60*24));
+        System.out.println(daysBetween);
+        int a=Math.round(daysBetween);
+        rate=((weekdayRate+weekendRate)/2)*a;
+        return rate;
     }
     public String toString() {
         return
