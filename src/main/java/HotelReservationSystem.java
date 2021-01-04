@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class HotelReservationSystem {
@@ -12,6 +14,21 @@ public class HotelReservationSystem {
         System.out.println("Hotel Added");
         return true;
     }
+    public Result findCheapestHotel(String initialDateRange,String endDateRange) throws ParseException
+    {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateBefore = myFormat.parse(initialDateRange);
+        Date dateAfter = myFormat.parse(endDateRange);
+        long difference = dateAfter.getTime() - dateBefore.getTime();
+        float daysBetween = (difference / (1000*60*60*24));
+        System.out.println(daysBetween);
+        int a=Math.round(daysBetween);
+        Hotel cheapestHotel= hotel.stream().min(Comparator.comparing(Hotel::getRatesForRegularCustomer)).orElseThrow(NoSuchElementException::new);
+        Result result =new Result();
+        result.setName(cheapestHotel.getName());
+        result.setRate(cheapestHotel.getRatesForRegularCustomer()*a);
+        return result;
+    }
     public void print()
     {
         for (Hotel h : hotel)
@@ -19,5 +36,4 @@ public class HotelReservationSystem {
             System.out.println(h);
         }
     }
-
 }
