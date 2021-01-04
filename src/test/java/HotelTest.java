@@ -61,6 +61,16 @@ public class HotelTest {
         h1.addHotel("Bridgewood",160);
         h1.addHotel("Ridgewood",220);
         List<Result> cheapestHotelResult= h1.findCheapestHotelBasedOnDay("24/12/1998","28/12/1998");
-        Assert.assertEquals(3,cheapestHotelResult.size());
+        Assert.assertEquals(2,cheapestHotelResult.size());
     }
+    @Test
+    public void givenDateRange_whenSearched_shouldReturnCheapestHotelBasedOnRatings()throws ParseException{
+        HotelReservationSystem h1=new HotelReservationSystem();
+        h1.addHotel("Lakewood",110);
+        h1.addHotel("Bridgewood",160);
+        h1.addHotel("Ridgewood",220);
+        List<Result> cheapestHotelResult= h1.findCheapestHotelBasedOnDayRating("24/12/1998","28/12/1998");
+        Assert.assertEquals(1, cheapestHotelResult.size());
+    }
+
 }

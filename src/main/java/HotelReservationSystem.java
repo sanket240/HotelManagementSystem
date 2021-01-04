@@ -76,6 +76,21 @@ public class HotelReservationSystem {
                 e.printStackTrace();
             }return  result;
         }).sorted(Comparator.comparing(Result::getRate)).collect(Collectors.toList());
-        return results.stream().filter(result -> result.getRate()==result.getRate()).collect(Collectors.toList());
+        return results.stream().filter(result -> result.getRate()==results.get(0).getRate()).collect(Collectors.toList());
+    }
+    public List<Result> findCheapestHotelBasedOnDayRating(String initialDateRange,String endDateRange) throws ParseException
+    {
+        List<Result> results= (List<Result>) this.hotel.stream().map(hotel1 -> {
+            Result result=new Result();
+            result.setName(hotel1.getName());
+            try {
+                result.setRate(hotel1.getTotalRates(initialDateRange,endDateRange));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            result.setRating(hotel1.getRatings());
+            return result;
+        }).sorted(Comparator.comparing(Result::getRating).thenComparing(Result::getRating,Comparator.reverseOrder())).collect(Collectors.toList());
+        return results.stream().filter(result -> result.getRating()==results.get(0).getRating()).collect(Collectors.toList());
     }
 }
