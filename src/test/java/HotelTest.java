@@ -41,6 +41,20 @@ public class HotelTest {
         Assert.assertTrue(result3);
     }
     @Test
+    public void hotelsWhenAddedShouldContainRatings()
+    {
+        boolean result,result2,result3;
+        HotelReservationSystem h1=new HotelReservationSystem();
+        result=h1.addHotelBasedOnRatings("Lakewood",110,90,3);
+        result2=h1.addHotelBasedOnRatings("Bridgewood",150,50,4);
+        result3=h1.addHotelBasedOnRatings("Ridgewood",220,150,5);
+        h1.print();
+        Assert.assertTrue(result);
+        Assert.assertTrue(result2);
+        Assert.assertTrue(result3);
+
+    }
+    @Test
     public void givenDateRange_whenSearched_shouldReturnCheapestHotelBasedOnWeekdayAndWeekend() throws ParseException {
         HotelReservationSystem h1=new HotelReservationSystem();
         h1.addHotel("Lakewood",110);

@@ -8,6 +8,16 @@ public class Hotel {
     int weekendRate;
     int weekdayRate;
     String name;
+    int ratings;
+
+    public int getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(int ratings) {
+        this.ratings = ratings;
+    }
+
     public int getWeekendRate() {
         return weekendRate;
     }
@@ -53,7 +63,8 @@ public class Hotel {
         return
                 "\n HotelName='" + name + '\'' +
                         ", Weekend rates'" +  weekendRate + '\''+
-                        ", Weekday rates'" +weekdayRate+ '\''
+                        ", Weekday rates'" +weekdayRate+ '\''+
+                        ", Ratings'" +ratings+ '\''
                 ;
     }
 }
